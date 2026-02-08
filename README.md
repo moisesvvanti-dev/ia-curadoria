@@ -88,11 +88,11 @@ python changelog_admin.py
 
 | Home Page | Admin Dashboard |
 |:---:|:---:|
-| <img src="https://via.placeholder.com/400x200?text=Home+Page" width="400"> | <img src="https://via.placeholder.com/400x200?text=Admin+Panel" width="400"> |
+| <img src="https://cdn.discordapp.com/attachments/1424014636298145907/1470155063967088742/image.png?ex=698a4419&is=6988f299&hm=913107d66a37a2f2d2f2f1f0eb949429c55b8c5d31b638379356b4482640c79f&" width="400"> | <img src="https://cdn.discordapp.com/attachments/1424014636298145907/1470154574965768262/image.png?ex=698a43a4&is=6988f224&hm=9cac2a192d1e7ea5ecd2c48f542f005c76d5a6f44425ba81d4314e2e9035aeb1&" width="400"> |
 
 | Mobile View | Bug Report Modal |
 |:---:|:---:|
-| <img src="https://via.placeholder.com/400x200?text=Mobile+App" width="400"> | <img src="https://via.placeholder.com/400x200?text=Bug+Report" width="400"> |
+| <img src="https://cdn.discordapp.com/attachments/1424014636298145907/1470155338949988464/image.png?ex=698a445a&is=6988f2da&hm=1165c4f90877c2edc69bb71cae56a287d53f8656f392f0c0825eca8b78fa44fc&" width="400"> | <img src="https://cdn.discordapp.com/attachments/1424014636298145907/1470154791224348877/image.png?ex=698a43d8&is=6988f258&hm=30d1ce11666091e959bb2b67da7a9fc3598723dbd08ff993074bd4f03b1c8674&" width="400"> |
 
 ---
 
