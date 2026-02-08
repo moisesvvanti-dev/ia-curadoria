@@ -1,0 +1,49 @@
+{
+    "rules": {
+        ".read": true,
+        "changelog": {
+            ".write": "auth != null",
+            ".indexOn": [
+                "timestamp"
+            ]
+        },
+        "popular_stats": {
+            "$week_id": {
+                "$tool_id": {
+                    ".write": "!data.exists() || newData.val() > data.val()",
+                    ".validate": "newData.isNumber()"
+                }
+            }
+        },
+        "search_activity": {
+            ".write": true,
+            "$entry_id": {
+                ".validate": "newData.hasChildren(['query', 'timestamp'])"
+            }
+        },
+        "access_logs": {
+            ".write": true,
+            "$entry_id": {
+                ".validate": "newData.hasChildren(['timestamp', 'userAgent'])"
+            }
+        },
+        "discovery_queue": {
+            ".write": true,
+            "$entry_id": {
+                ".validate": "newData.isString()"
+            }
+        },
+        "bug_reports": {
+            ".write": true,
+            "$report_id": {
+                ".validate": "newData.hasChildren(['type', 'description', 'timestamp']) && newData.child('description').val().length < 2000 && newData.child('type').val().length < 50 && newData.child('page').val().length < 100 && newData.child('timestamp').val() <= now"
+            }
+        },
+        "supporters": {
+            ".write": "auth != null",
+            ".indexOn": [
+                "total_amount"
+            ]
+        }
+    }
+}

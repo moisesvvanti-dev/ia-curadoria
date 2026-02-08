@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' https:; script-src 'self' 'unsafe-inline' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' https: data:;">
+    <title>AI Curator | Ultimate Experience</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/support.css">
+    <link rel="stylesheet" href="assets/css/changelog.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="app-shell">
+        <!-- DESKTOP SIDEBAR -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-dot"></div>
+                LUMINOUS
+                <span class="site-version"
+                    style="display:block;font-size:0.65rem;color:#6366f1;margin-top:5px;font-weight:400;">Carregando...</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="nav-item active" onclick="switchView('explore'); return false;"><span
+                        class="material-icons-round nav-icon">grid_view</span> Explorar</a>
+                <a href="#" class="nav-item" onclick="switchView('popular'); return false;"><span
+                        class="material-icons-round nav-icon">local_fire_department</span> Popular</a>
+                <a href="#" class="nav-item" onclick="switchView('favorites'); return false;"><span
+                        class="material-icons-round nav-icon">bookmark_border</span> Salvos</a>
+                <a href="#" class="nav-item" onclick="switchView('support'); return false;"><span
+                        class="material-icons-round nav-icon">volunteer_activism</span> Apoiar Projeto</a>
+                <a href="#" class="nav-item" onclick="switchView('changelog'); return false;"><span
+                        class="material-icons-round nav-icon">history</span> Changelog</a>
+                <div style="flex:1"></div>
+                <a href="#" class="nav-item" onclick="openBugReport(); return false;" style="color: #f59e0b;"><span
+                        class="material-icons-round nav-icon">bug_report</span> Reportar Bug</a>
+                <a href="#" class="nav-item" onclick="switchView('settings'); return false;"><span
+                        class="material-icons-round nav-icon">settings</span> Ajustes</a>
+            </nav>
+        </aside>
+
+        <!-- MAIN VIEW -->
+        <main class="main-view">
+            <header class="app-header">
+                <div class="search-container">
+                    <span class="material-icons-round search-icon">search</span>
+                    <input type="text" class="search-input" id="globalSearch"
+                        placeholder="Buscar ferramenta (ex: chatgpt, midjourney)...">
+                </div>
+                <div class="user-profile" onclick="switchView('settings')">
+                    <img src="assets/img/moises_dev.png" alt="Moisés Dev">
+                </div>
+            </header>
+
+            <div class="content-scroll">
+
+                <!-- VIEW: EXPLORE (Default) -->
+                <div id="view-explore">
+                    <section class="hero-clean">
+                        <h1>Curadoria de IAs<br>para Profissionais</h1>
+                        <p>Encontre as melhores ferramentas de inteligência artificial com design limpo e alta
+                            performance.</p>
+                        <button class="btn-primary-clean" onclick="window.scrollToGrid()">Explorar Agora</button>
+                    </section>
+
+                    <h3 style="margin-bottom:24px; color:var(--text-primary);">TENDÊNCIAS HOJE</h3>
+                    <div id="aiGrid" class="masonry-grid">
+                        <!-- CONTENT INJECTED VIA JS -->
+                    </div>
+                </div>
+
+                <!-- VIEW: POPULAR -->
+                <div id="view-popular" style="display: none; padding: 40px;">
+                    <h1>Populares</h1>
+                    <p style="color:#888;">As ferramentas mais acessadas da semana.</p>
+                    <div class="masonry-grid" id="popularGrid"></div>
+                </div>
+
+                <!-- VIEW: FAVORITES -->
+                <div id="view-favorites" style="display: none; padding: 40px;">
+                    <h1>Salvos</h1>
+                    <p style="color:#888;">Seus itens favoritos aparecerão aqui.</p>
+                </div>
+
+                <!-- VIEW: SUPPORT - PREMIUM DONATION SYSTEM v3 -->
+                <div id="view-support" style="display: none; padding: 20px 40px;">
+                    <div class="support-container">
+
+                        <!-- Hero Header -->
+                        <div class="support-hero">
+                            <div class="hero-badge">
+                                <span class="material-icons-round">verified</span>
+                                Verificação Automática de Pagamentos
+                            </div>
+                            <h1 class="support-title">Apoie o Luminous</h1>
+                            <p class="support-subtitle">
+                                Sua contribuição mantém o projeto vivo. Todos os pagamentos são verificados
+                                automaticamente via PayPal.
+                            </p>
+                        </div>
+
+                        <!-- Security Strip -->
+                        <div class="security-strip">
+                            <div class="security-item">
+                                <span class="material-icons-round">verified_user</span>
+                                Verificação PayPal IPN
+                            </div>
+                            <div class="security-item">
+                                <span class="material-icons-round">shield</span>
+                                Proteção Anti-Fraude
+                            </div>
+                            <div class="security-item">
+                                <span class="material-icons-round">lock</span>
+                                Criptografia SSL
+                            </div>
+                        </div>
+
+                        <!-- Donation Tiers -->
+                        <div class="tiers-section">
+                            <div class="tiers-grid">
+                                <!-- Tier 1 -->
+                                <div class="tier-card" data-amount="5">
+                                    <span class="tier-emoji">☕</span>
+                                    <div class="tier-price">R$5<span>/único</span></div>
+                                    <div class="tier-name">Apoiador</div>
+                                    <ul class="tier-perks">
+                                        <li><span class="material-icons-round">check_circle</span> Um café para o dev
+                                        </li>
+                                        <li><span class="material-icons-round">check_circle</span> Badge Bronze no
+                                            ranking</li>
+                                        <li><span class="material-icons-round">check_circle</span> Agradecimento eterno
+                                        </li>
+                                    </ul>
+                                    <button class="tier-btn secondary" onclick="LuminousDonate.process(5)">
+                                        <span class="material-icons-round">favorite</span>
+                                        Apoiar com R$5
+                                    </button>
+                                </div>
+
+                                <!-- Tier 2 (Featured) -->
+                                <div class="tier-card featured" data-amount="15">
+                                    <div class="featured-label">⭐ Mais Popular</div>
+                                    <span class="tier-emoji">🚀</span>
+                                    <div class="tier-price">R$15<span>/único</span></div>
+                                    <div class="tier-name">Impulsionador</div>
+                                    <ul class="tier-perks">
+                                        <li><span class="material-icons-round">check_circle</span> Ajuda a pagar
+                                            servidores</li>
+                                        <li><span class="material-icons-round">check_circle</span> Badge Silver no
+                                            ranking</li>
+                                        <li><span class="material-icons-round">check_circle</span> Nome nos créditos
+                                        </li>
+                                        <li><span class="material-icons-round">check_circle</span> Prioridade em
+                                            features</li>
+                                    </ul>
+                                    <button class="tier-btn primary" onclick="LuminousDonate.process(15)">
+                                        <span class="material-icons-round">rocket_launch</span>
+                                        Impulsionar com R$15
+                                    </button>
+                                </div>
+
+                                <!-- Tier 3 -->
+                                <div class="tier-card" data-amount="50">
+                                    <span class="tier-emoji">💎</span>
+                                    <div class="tier-price">R$50<span>/único</span></div>
+                                    <div class="tier-name">Patrocinador</div>
+                                    <ul class="tier-perks">
+                                        <li><span class="material-icons-round">check_circle</span> Tudo do anterior</li>
+                                        <li><span class="material-icons-round">check_circle</span> Badge Gold/Diamond
+                                        </li>
+                                        <li><span class="material-icons-round">check_circle</span> Logo no footer</li>
+                                        <li><span class="material-icons-round">check_circle</span> Acesso antecipado
+                                        </li>
+                                        <li><span class="material-icons-round">check_circle</span> Suporte direto</li>
+                                    </ul>
+                                    <button class="tier-btn secondary" onclick="LuminousDonate.process(50)">
+                                        <span class="material-icons-round">diamond</span>
+                                        Patrocinar com R$50
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Custom Amount -->
+                        <div class="custom-section">
+                            <h3>Ou escolha seu próprio valor</h3>
+                            <div class="custom-form">
+                                <div class="custom-input-group">
+                                    <span class="currency">R$</span>
+                                    <input type="number" id="customAmount" min="1" max="10000" placeholder="Valor"
+                                        class="custom-input">
+                                </div>
+                                <button class="custom-btn" onclick="LuminousDonate.processCustom()">
+                                    <span class="material-icons-round">send</span>
+                                    Doar Agora
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Supporters Ranking -->
+                        <div class="ranking-section">
+                            <div class="ranking-header">
+                                <h2 class="ranking-title">
+                                    <span class="material-icons-round">emoji_events</span>
+                                    Hall da Fama - Apoiadores Verificados
+                                </h2>
+                                <span class="ranking-badge">✓ Verificado via PayPal</span>
+                            </div>
+                            <div class="ranking-grid" id="rankingGrid">
+                                <div class="ranking-loading">
+                                    <span class="material-icons-round rotating">sync</span>
+                                    <p>Carregando apoiadores...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trust Strip -->
+                        <div class="trust-strip">
+                            <div class="trust-card">
+                                <span class="material-icons-round">security</span>
+                                <div>
+                                    <strong>PayPal IPN</strong>
+                                    <p>Verificação automática</p>
+                                </div>
+                            </div>
+                            <div class="trust-card">
+                                <span class="material-icons-round">gpp_good</span>
+                                <div>
+                                    <strong>Anti-Fraude</strong>
+                                    <p>Proteção contra falsificação</p>
+                                </div>
+                            </div>
+                            <div class="trust-card">
+                                <span class="material-icons-round">receipt_long</span>
+                                <div>
+                                    <strong>Recibo Automático</strong>
+                                    <p>Comprovante via email</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="support-footer">
+                            <p>Transações processadas de forma segura via <strong>PayPal</strong></p>
+                            <div class="payment-methods">
+                                <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
+                                    alt="PayPal">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: CHANGELOG -->
+                <div id="view-changelog" style="display: none; padding: 40px; max-width: 1000px; margin: 0 auto;"
+                    class="changelog-view">
+                    <!-- PREMIUM HEADER -->
+                    <div style="text-align: center; margin-bottom: 50px;">
+                        <div
+                            style="display: inline-flex; align-items: center; gap: 15px; background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.1)); padding: 12px 25px; border-radius: 50px; border: 1px solid rgba(99,102,241,0.3); margin-bottom: 25px;">
+                            <span class="material-icons-round"
+                                style="color: #10b981; font-size: 18px; animation: pulse 2s infinite;">fiber_manual_record</span>
+                            <span style="color: #94a3b8; font-size: 0.85rem; font-weight: 500;">Sincronizado em tempo
+                                real via Firebase</span>
+                        </div>
+                        <h1
+                            style="font-size: 3rem; font-weight: 800; margin: 0 0 15px 0; background: linear-gradient(135deg, #fff 0%, #6366f1 50%, #8b5cf6 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
+                            Changelog
+                        </h1>
+                        <p style="color: #64748b; font-size: 1.1rem; margin: 0; max-width: 500px; margin: 0 auto;">
+                            Histórico completo de atualizações, melhorias e correções do sistema
+                        </p>
+                    </div>
+                    <div id="changelogContainer">
+                        <!-- SKELETON LOADER (Placeholders) -->
+                        <div class="skeleton-loader">
+                            <div class="skeleton-item">
+                                <div class="skeleton-date">
+                                    <div class="sk-blob sk-day"></div>
+                                    <div class="sk-blob sk-month"></div>
+                                </div>
+                                <div class="skeleton-content sk-blob"></div>
+                            </div>
+                            <div class="skeleton-item">
+                                <div class="skeleton-date">
+                                    <div class="sk-blob sk-day"></div>
+                                    <div class="sk-blob sk-month"></div>
+                                </div>
+                                <div class="skeleton-content sk-blob"></div>
+                            </div>
+                            <div class="skeleton-item">
+                                <div class="skeleton-date">
+                                    <div class="sk-blob sk-day"></div>
+                                    <div class="sk-blob sk-month"></div>
+                                </div>
+                                <div class="skeleton-content sk-blob"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW: SETTINGS -->
+                <div id="view-settings" style="display: none; padding: 40px;">
+                    <div class="settings-container" style="max-width: 600px; margin: 0 auto;">
+                        <h1 style="margin-bottom: 30px;">Ajustes</h1>
+
+                        <div class="settings-group"
+                            style="background: rgba(255,255,255,0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08);">
+                            <div class="setting-item"
+                                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+                                <div>
+                                    <h4 style="margin:0;">Tema do Sistema</h4>
+                                    <p style="color:#888; margin:5px 0 0; font-size:0.8rem;">Alternar entre modo claro e
+                                        escuro</p>
+                                </div>
+                                <button class="btn-toggle" onclick="toggleTheme()"
+                                    style="background:rgba(99,102,241,0.2); border:1px solid #6366f1; color:#fff; padding:8px 15px; border-radius:10px; cursor:pointer;">DARK
+                                    MODE</button>
+                            </div>
+
+                            <div class="setting-item"
+                                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+                                <div>
+                                    <h4 style="margin:0;">Cache de Navegação</h4>
+                                    <p style="color:#888; margin:5px 0 0; font-size:0.8rem;">Limpar histórico de cliques
+                                        (Popular)</p>
+                                </div>
+                                <button onclick="clearTracking()"
+                                    style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:8px 15px; border-radius:10px; cursor:pointer;">LIMPAR</button>
+                            </div>
+
+                            <div class="setting-item"
+                                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px;">
+                                <div>
+                                    <h4 style="margin:0;">Modo Econômico</h4>
+                                    <p style="color:#888; margin:5px 0 0; font-size:0.8rem;">PC Fraco e Mobile Antigo
+                                        (Desativa efeitos)</p>
+                                </div>
+                                <input type="checkbox" id="ecoMode" style="width:20px; height:20px;">
+                            </div>
+
+                            <div class="setting-item"
+                                style="display: flex; align-items: center; justify-content: space-between;">
+                                <div>
+                                    <h4 style="margin:0;">Privacidade</h4>
+                                    <p style="color:#888; margin:5px 0 0; font-size:0.8rem;">Modo de navegação anônima
+                                    </p>
+                                </div>
+                                <input type="checkbox" id="anonymousMode" style="width:20px; height:20px;">
+                            </div>
+                        </div>
+
+                        <div style="margin-top:40px; text-align:center;">
+                            <p style="color:#444; font-size:0.8rem;" id="site-version">LUMINOUS v9.0.2 - Premium AI
+                                Catalog</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- MOBILE BOTTOM NAV - Moved outside main for correct fixed positioning -->
+        <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-item active" onclick="switchView('explore'); return false;"><span
+                    class="material-icons-round">grid_view</span>Inicio</a>
+            <a href="#" class="mobile-nav-item" onclick="switchView('popular'); return false;"><span
+                    class="material-icons-round">local_fire_department</span>Popular</a>
+            <a href="#" class="mobile-nav-item" onclick="switchView('support'); return false;"><span
+                    class="material-icons-round">volunteer_activism</span>Apoiar</a>
+            <a href="#" class="mobile-nav-item" onclick="switchView('changelog'); return false;"><span
+                    class="material-icons-round">history</span>Updates</a>
+            <a href="#" class="mobile-nav-item" onclick="openBugReport(); return false;" style="color: #f59e0b;"><span
+                    class="material-icons-round">bug_report</span>Bug</a>
+            <a href="#" class="mobile-nav-item" onclick="switchView('settings'); return false;"><span
+                    class="material-icons-round">settings</span>Ajustes</a>
+        </nav>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+        <script>
+            const FIREBASE_CONFIG = {
+                apiKey: "AIzaSyDKL_tODwAIEnCq10-s5DRzFeHWsQLViOs",
+                authDomain: "sunshinecursos-5f92a.firebaseapp.com",
+                databaseURL: "https://sunshinecursos-5f92a-default-rtdb.firebaseio.com",
+                projectId: "sunshinecursos-5f92a",
+                storageBucket: "sunshinecursos-5f92a.firebasestorage.app",
+                messagingSenderId: "676918284241",
+                appId: "1:676918284241:web:5a698588c827d77e9c1af0"
+            };
+            if (!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+        </script>
+
+        <script src="assets/js/security.js"></script>
+        <script src="assets/js/app.js"></script>
+        <script src="assets/js/donate.js"></script>
+        <script src="assets/js/changelog.js?v=debug2"></script>
+</body>
+
+</html>
