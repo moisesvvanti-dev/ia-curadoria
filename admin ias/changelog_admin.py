@@ -38,9 +38,9 @@ from PyQt5.QtGui import QFont, QColor, QPalette, QLinearGradient, QBrush, QIcon,
 # ============================================================
 # FIREBASE CONFIG
 # ============================================================
-FIREBASE_URL = "https://sunshinecursos-5f92a-default-rtdb.firebaseio.com"
-FIREBASE_API_KEY = "AIzaSyDKL_tODwAIEnCq10-s5DRzFeHWsQLViOs" # Key publica do projeto
-EMAIL_ADMIN = "moisesvvanti@gmail.com"
+FIREBASE_URL = ""
+FIREBASE_API_KEY = "" # Key publica do projeto
+EMAIL_ADMIN = "seu EMAIL_ADMIN"
 
 
 # ============================================================
